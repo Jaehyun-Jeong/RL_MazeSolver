@@ -67,40 +67,40 @@ class ActorCritic():
         self.ups=1e-7
 
     def pi(self, s, a):
-        s = torch.Tensor(s)
+        s = torch.Tensor(s).to(self.device)
         _, probs = self.model.forward(s)
         probs = torch.squeeze(probs, 0)
         return probs[a]
     
-    def get_action(self, state):
-        state = torch.tensor(state).to(device)
-        _, probs = self.model.forward(state)
+    def get_action(self, s):
+        s = torch.tensor(s).to(self.device)
+        _, probs = self.model.forward(s)
         probs = torch.squeeze(probs, 0)
         
-        action = probs.multinomial(num_samples=1)
-        action = action.data
+        a = probs.multinomial(num_samples=1)
+        a = a.data
         
-        action = action[0]
+        action = a[0]
         return action
     
-    def epsilon_greedy_action(self, state, epsilon = 0.1):
-        state = torch.tensor(state)
-        state = torch.unsqueeze(state, 0)
-        _, probs = self.model.forward(state)
+    def epsilon_greedy_action(self, s, epsilon = 0.1):
+        s = torch.tensor(s).to(self.device)
+        s = torch.unsqueeze(s, 0)
+        _, probs = self.model.forward(s)
         
         probs = torch.squeeze(probs, 0)
         
         if random.random() > epsilon:
-            action = torch.tensor([torch.argmax(probs)])
+            a = torch.tensor([torch.argmax(probs)])
         else:
-            action = torch.rand(probs.shape).multinomial(num_samples=1)
+            a = torch.rand(probs.shape).multinomial(num_samples=1)
         
-        action = action.data
-        action = action[0]
+        a = a.data
+        action = a[0]
         return action
     
     def value(self, s):
-        s = torch.tensor(s)
+        s = torch.tensor(s).to(self.device)
         s = torch.unsqueeze(s, 0)
         value, _ = self.model.forward(s)
         value = torch.squeeze(value, 0)
