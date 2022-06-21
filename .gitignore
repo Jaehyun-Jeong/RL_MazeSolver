@@ -1,6 +1,9 @@
 # IGNORE FOLDERS
 
 *.ipynb_checkpoints
+
 *.__pycache__
+
 *.runs
+
 *saved_models
