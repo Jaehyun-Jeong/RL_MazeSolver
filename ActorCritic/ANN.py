@@ -51,12 +51,12 @@ class model(nn.Module):
         
         return value, probs
         
-
 class ActorCritic():
     def __init__(self, **params_dict): # parmas = {env, model, optimizer, maxTimesteps, stepsize}
         super(ActorCritic, self).__init__()
 
         # init parameters 
+        self.device = params_dict['device']
         self.env = params_dict['env']
         self.model = params_dict['model']
         self.optimizer = params_dict['optimizer']
@@ -73,7 +73,7 @@ class ActorCritic():
         return probs[a]
     
     def get_action(self, state):
-        state = torch.tensor(state)
+        state = torch.tensor(state).to(device)
         _, probs = self.model.forward(state)
         probs = torch.squeeze(probs, 0)
         
