@@ -9,48 +9,13 @@ import torch.nn as nn
 import torch.nn.functional as F
 import torchvision.transforms as T
 import torch.optim as optim
-import torch.autograd as autograd
-from torch.autograd import Variable
+
+# import model
+from models.ANN import ANN_V1
 
 # Environment 
 import gym
 
-'''
-    ActorCritic_paramters = {
-        device = device, # device to use, 'cuda' or 'cpu'
-        env = env, # environment like gym
-        model = actor_critic, # torch models for policy and value funciton
-        optimizer = optimizeGr, # torch optimizer
-        #MAX_EPISODES = MAX_EPISODES, # maximum episodes you want to learn
-        maxTimesteps= MAX_TIMESTEPS, # maximum timesteps agent take 
-        stepsize = GAMMA # step-size for updating Q value
-    }
-'''
-
-class model(nn.Module):
-    def __init__(self, inputs, outputs):
-        super(model, self).__init__()
-
-        # for Actor
-        self.actor_fc1 = nn.Linear(inputs, 256)
-        self.actor_fc2 = nn.Linear(256, outputs)
-        self.head = nn.Softmax(dim=0)
-
-        # for Critic
-        self.critic_fc1 = nn.Linear(inputs, 256)
-        self.critic_fc2 = nn.Linear(256, 1)
-        
-    def forward(self, x):
-        state = x
-        
-        probs = F.relu(self.actor_fc1(state))
-        probs = self.head(self.actor_fc2(probs))
-        
-        value = F.relu(self.critic_fc1(state))
-        value = self.critic_fc2(value)
-        
-        return value, probs
-        
 class ActorCritic():
     def __init__(self, **params_dict): # parmas = {env, model, optimizer, maxTimesteps, stepsize}
         super(ActorCritic, self).__init__()
@@ -196,7 +161,7 @@ if __name__ == "__main__":
     # set ActorCritic
     num_actions = env.action_space.n
     num_states = env.observation_space.shape[0]
-    ACmodel = model(num_states, num_actions).to(device)
+    ACmodel = ANN_V1(num_states, num_actions).to(device)
     optimizer = optim.Adam(ACmodel.parameters(), lr=ALPHA)
 
     ActorCritic_parameters = {
