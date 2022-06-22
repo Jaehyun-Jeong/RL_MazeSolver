@@ -52,7 +52,7 @@ https://www.pygame.org/project/5609
 **Gradient Method는 목적함수로의 Gradient Ascent이다.**
 이는 알고리즘의 다음 부분을 보면 알 수 있다.
 
-$\theta \leftarrow \theta + \alpha \gamma^t \nabla ln\, \pi(A_t | S_t, \theta)$
+$$ \theta \leftarrow \theta + \alpha \gamma^t \nabla ln\, \pi(A_t | S_t, \theta) $$
 
 > 최적화 알고리즘인 Gradient Descent는 다음과 같은 구조를 가진다.
 > $\theta \leftarrow \theta - \text{learning rate} \times \text{gradient of Error}$
