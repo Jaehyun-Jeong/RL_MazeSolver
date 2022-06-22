@@ -39,7 +39,7 @@ https://www.pygame.org/project/5609
 
 ### 1) Policy Based Gradient Method
 
-위의 의사코드를 보면 알 수 있듯이 Policy인 $\pi (\cdot | \cdot), \theta)$의 $\theta$만을 수정하고 있음을 알 수 있다.
+위의 의사코드를 보면 알 수 있듯이 Policy인 $ \pi (\cdot | \cdot), \theta) $의 $ \theta $만을 수정하고 있음을 알 수 있다.
 
 **이같이 Policy의(Policy Based) Weight만을 수정(Gradient Method)하는 방법을 Policy Based Gradient Method라 한다.**
 
@@ -86,23 +86,23 @@ $$
 
 Policy는 상태(state)들의 집합에서 행동의 확률분포(distribution)로 가는 함수이다.
 
-그리고 상태 $ s $에서 Policy $ \pi $를 따라가는 State Value Function은 다음과 같이 정의한다.
+그리고 상태 $ s $ 에서 Policy $ \pi $를 따라가는 State Value Function은 다음과 같이 정의한다.
 
-$v_\pi (s) = \mathbb{E}_\pi \left[ G_t | S_t = s \right] = \mathbb{E}_\pi \left[ \displaystyle\sum_{k=0}^{\infty} \gamma^k R_{t+k+1} | S_t = s \right] \,\, \text{ for all } s \isin \mathcal{S}$
+$ v_\pi (s) = \mathbb{E}_\pi \left[ G_t | S_t = s \right] = \mathbb{E}_\pi \left[ \displaystyle\sum_{k=0}^{\infty} \gamma^k R_{t+k+1} | S_t = s \right] \,\, \text{ for all } s \isin \mathcal{S} $
 
-또한, 상태 $s$에서 행동 $a$를 선택하고 Policy $\pi$를 따라가는 Action Value Function은 다음과 같다.
+또한, 상태 $ s $에서 행동 $ a $를 선택하고 Policy $ \pi $를 따라가는 Action Value Function은 다음과 같다.
 
-$q_\pi (s, a) = \mathbb{E}_\pi \left[ G_t | S_t = s, A_t = a \right] = \mathbb{E}_\pi \left[ \displaystyle\sum_{k=0}^{\infty} \gamma^k R_{t+k+1} | S_t = s, A_t = a \right] \,\, \text{ for all } s \isin \mathcal{S}, a \isin \mathcal{A}(s)$
+$ q_\pi (s, a) = \mathbb{E}_\pi \left[ G_t | S_t = s, A_t = a \right] = \mathbb{E}_\pi \left[ \displaystyle\sum_{k=0}^{\infty} \gamma^k R_{t+k+1} | S_t = s, A_t = a \right] \,\, \text{ for all } s \isin \mathcal{S}, a \isin \mathcal{A}(s) $
 
 **위같은 함수들을 Value Function이라 하고, 에이전트가 Value Function 기반으로 행동을 결정할 경우 Value Based Method라 한다.**
 
 ### 2) Actor-Critic의 의미
 
-위의 의사코드를 보면 알 수 있듯이 Actor-Critic Method는 두 가중치 $w, \theta$를 업데이트한다.
+위의 의사코드를 보면 알 수 있듯이 Actor-Critic Method는 두 가중치 $ w, \theta $를 업데이트한다.
 
 **이같이, Policy(Actor)와 Value Function(Critic)을 동시에 학습하는 방법을 Actor-Critic Method라 한다.**
 
-> 보면 $\hat{v}$과 같이 표현했는데, $\hat{  }$ (hat)은 추정값을 의미한다. 그리고 추정값을 사용하는 이유는 환경에서 임의의 상태에 대해 그 Value를 알 수 없기 때문이다.
+> 보면 $ \hat{v} $과 같이 표현했는데, $ \hat{  } $ (hat)은 추정값을 의미한다. 그리고 추정값을 사용하는 이유는 환경에서 임의의 상태에 대해 그 Value를 알 수 없기 때문이다.
 
 ### 3) Critic과 Variance
 
@@ -120,43 +120,43 @@ $q_\pi (s, a) = \mathbb{E}_\pi \left[ G_t | S_t = s, A_t = a \right] = \mathbb{E
 
 *출처: [Jerry Liu’s post to “Why does the policy gradient method have high variance”](https://www.quora.com/unanswered/Why-does-the-policy-gradient-method-have-a-high-variance)*
 
-이제 $G_t$의 평균값 $\bar{G}$을 알고있다고 가정하자. 이때, $G_t - \bar{G}$로 업데이트를 하면 Variance를 줄일 수 있다.
+이제 $ G_t $의 평균값 $ \bar{G} $을 알고있다고 가정하자. 이때, $ G_t - \bar{G} $로 업데이트를 하면 Variance를 줄일 수 있다.
 
-**이같이, Variance를 줄이기 위해 사용하는 $\bar{G}$와 같은 항을 baseline이라 한다.**
+**이같이, Variance를 줄이기 위해 사용하는 $ \bar{G} $와 같은 항을 baseline이라 한다.**
 
-이러한 관점에서 Actor-Critic 의사코드에서 $G_t$ 대신에 $\delta$와 같은 표현을 사용한 이유는 다음과 같다.
+이러한 관점에서 Actor-Critic 의사코드에서 $ G_t $ 대신에 $ \delta $와 같은 표현을 사용한 이유는 다음과 같다.
 
 ---
 
 #### Equation 1
 
-$R_{t+1} + \gamma \hat{v} (s_{t+1}, w)$
+$ R_{t+1} + \gamma \hat{v} (s_{t+1}, w) $
 
-$= R_{t+1} + \gamma \mathbb{E}_\pi [G_{t+1} | s_{t+1}]$
+$ = R_{t+1} + \gamma \mathbb{E}_\pi [G_{t+1} | s_{t+1}] $
 
-$= R_{t+1} + \gamma \mathbb{E}_\pi \left[\displaystyle\sum_{k=0}^{\infty} \gamma^k R_{t+k+2} | s_{t+1} \right]$
+$ = R_{t+1} + \gamma \mathbb{E}_\pi \left[\displaystyle\sum_{k=0}^{\infty} \gamma^k R_{t+k+2} | s_{t+1} \right] $
 
-$\approx R_{t+1} + \gamma \left( R_{t+2} + R_{t+2} + \cdots \right)$
+$ \approx R_{t+1} + \gamma \left( R_{t+2} + R_{t+2} + \cdots \right) $
 
-$= G_t$
+$ = G_t $
 
 ---
 
 #### Equation 2
 
-$R_{t+1} + \gamma \hat{v} (s_{t+1}, w)$
+$ R_{t+1} + \gamma \hat{v} (s_{t+1}, w) $
 
-$= \hat{q} (s_t, a_t, w)$
+$ = \hat{q} (s_t, a_t, w) $
 
 ---
 
 #### Equation 3
 
-$\delta = \hat{q} (s_t, a_t, w) - \hat{v} (s_t, w)$
+$ \delta = \hat{q} (s_t, a_t, w) - \hat{v} (s_t, w) $
 
-$= \hat{q} (s_t, a_t, w) - \displaystyle\sum_a \pi(a | s_t) \hat{q} (s_t, a, w)$
+$ = \hat{q} (s_t, a_t, w) - \displaystyle\sum_a \pi(a | s_t) \hat{q} (s_t, a, w) $
 
-* $\pi(a, | s_t)$ : 상태 $s_t$에서 행동 $a$를 선택할 확률
+* $ \pi(a, | s_t) $ : 상태 $s_t$에서 행동 $a$를 선택할 확률
 
 ---
 
