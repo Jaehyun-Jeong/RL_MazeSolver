@@ -88,7 +88,7 @@ Policy는 상태(state)들의 집합에서 행동의 확률분포(distribution)�
 
 그리고 상태 $s$에서 Policy $ \pi $를 따라가는 State Value Function은 다음과 같이 정의한다.
 
-$$ v_\pi (s) = \mathbb{E}_\pi \left[ G_t | S_t = s \right] = \mathbb{E}_\pi \left[ \displaystyle\sum_{k=0}^{\infty} \gamma^k R_{t+k+1} | S_t = s \right] \,\, \text{ for all } s \in \mathcal{S} $$
+$$ v_\pi (s) = \mathbb{E}_\pi \left[ G_t | S_t = s \right] = \mathbb{E}_\pi \left[ \displaystyle\sum_{k=0}^{\infty} \gamma^k R_{t+k+1} | S_t = s \right] \, \text{ for all } s \in \mathcal{S} $$
 
 또한, 상태 $ s $에서 행동 $ a $를 선택하고 Policy $ \pi $를 따라가는 Action Value Function은 다음과 같다.
 
