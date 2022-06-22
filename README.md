@@ -88,11 +88,11 @@ Policy는 상태(state)들의 집합에서 행동의 확률분포(distribution)�
 
 그리고 상태 $s$에서 Policy $ \pi $를 따라가는 State Value Function은 다음과 같이 정의한다.
 
-$$ v_\pi (s) = \mathbb{E}_\pi \left[ G_t | S_t = s \right] = \mathbb{E}_\pi \left[ \displaystyle\sum_{k=0}^{\infty} \gamma^k R_{t+k+1} | S_t = s \right] \, \text{ for all } s \in \mathcal{S} $$
+$$ v_\pi (s) = \mathbb{E}{\pi} \left[ G_{t} | S_{t} = s \right] = \mathbb{E}{\pi} \left[ \displaystyle\sum_{k=0}^{\infty} \gamma^k R_{t+k+1} | S_{t} = s \right] \, \text{ for all } s \in \mathcal{S} $$
 
 또한, 상태 $ s $에서 행동 $ a $를 선택하고 Policy $ \pi $를 따라가는 Action Value Function은 다음과 같다.
 
-$q_\pi (s, a) = \mathbb{E}{\pi} \left[ G{t} | S{t} = s, A{t} = a \right] = \mathbb{E}{\pi} \left[ \displaystyle\sum_{k=0}^{\infty} \gamma^k R_{t+k+1} | S_t = s, A_t = a \right] \,\, \text{ for all } s \in \mathcal{S}, a \in \mathcal{A}(s)$
+$q_\pi (s, a) = \mathbb{E}{\pi} \left[ G_{t} | S_{t} = s, A_{t} = a \right] = \mathbb{E}{\pi} \left[ \displaystyle\sum_{k=0}^{\infty} \gamma^k R_{t+k+1} | S{t} = s, A{t} = a \right] \,\, \text{ for all } s \in \mathcal{S}, a \in \mathcal{A}(s)$
 
 **위같은 함수들을 Value Function이라 하고, 에이전트가 Value Function 기반으로 행동을 결정할 경우 Value Based Method라 한다.**
 
