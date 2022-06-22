@@ -395,7 +395,7 @@ class MazeSolverEnv:
             print("actions are in between 0 to 3")
             print("==========================================")
             
-    def reset_player(self, exploring_starts = False, random_goal = False):
+    def reset(self, exploring_starts = False, random_goal = False):
         corridor_idxs = np.argwhere(self.blocks == 0) # 0's are corridor
         
         for corridor_idx in corridor_idxs:
@@ -426,9 +426,10 @@ class MazeSolverEnv:
         self.maze_solver.draw_cell(self.maze_solver.start_pos, self.maze_solver.start_pos, self.maze_solver.start_color)
         self.maze_solver.draw_cell(self.maze_solver.end_pos, self.maze_solver.end_pos, self.maze_solver.end_color)
         pygame.display.flip()
-        
+
+        return self.init_obs 
     
-    def reset(self, exploring_starts = False, random_goal = False):
+    def reset_maze(self, exploring_starts = False, random_goal = False):
         # intialize a maze, given size (y, x)
         maze = maze_generator.Maze(self.rect[2] // (self.cell_size * 2) - 1, self.rect[3] // (self.cell_size * 2) - 1)
         maze.screen = self.screen  # if this is set, the maze generation process will be displayed in a window. Otherwise not.
@@ -485,9 +486,8 @@ class MazeSolverEnv:
         obs[start_pos[0]][start_pos[1]] = 3 # unit_pos index as 3
         obs[end_pos[0]][end_pos[1]] = 4 # end_pos index as 4
         
-        # one hot encoding (1 channel to 4 channel)
+        # one hot encoding (1 channel to 5 channel)
         obs = np.array([([channel_num] == obs[..., None]).astype(int).reshape(obs.shape[0], obs.shape[1]) for channel_num in range(0, self.num_celltype)], dtype=np.float32)
-        
         
         return obs
     

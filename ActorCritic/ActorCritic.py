@@ -66,10 +66,9 @@ class ActorCritic():
     
     def value(self, s):
         s = torch.tensor(s).to(self.device)
-        s = torch.unsqueeze(s, 0)
+        #s = torch.unsqueeze(s, 0)
         value, _ = self.model.forward(s)
         value = torch.squeeze(value, 0)
-        value = value[0]
         
         return value    
 
@@ -102,7 +101,7 @@ class ActorCritic():
 
             for i_episode in range(maxEpisodes):
 
-                state = env.reset()
+                state = self.env.reset()
                 init_state = state
 
                 done = False
@@ -183,4 +182,3 @@ if __name__ == "__main__":
 
     # TRAIN Agent
     AC.train(MAX_EPISODES)
-
