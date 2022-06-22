@@ -16,9 +16,9 @@ from models.ANN import ANN_V1
 # Environment 
 import gym
 
-class ActorCritic():
+class REINFORCE():
     def __init__(self, **params_dict): # parmas = {env, model, optimizer, maxTimesteps, stepsize}
-        super(ActorCritic, self).__init__()
+        super(REINFORCE, self).__init__()
 
         # init parameters 
         self.device = params_dict['device']
@@ -33,13 +33,13 @@ class ActorCritic():
 
     def pi(self, s, a):
         s = torch.Tensor(s).to(self.device)
-        _, probs = self.model.forward(s)
+        probs = self.model.forward(s)
         probs = torch.squeeze(probs, 0)
         return probs[a]
     
     def get_action(self, s):
         s = torch.tensor(s).to(self.device)
-        _, probs = self.model.forward(s)
+        probs = self.model.forward(s)
         probs = torch.squeeze(probs, 0)
         
         a = probs.multinomial(num_samples=1)
@@ -51,7 +51,7 @@ class ActorCritic():
     def epsilon_greedy_action(self, s, epsilon = 0.1):
         s = torch.tensor(s).to(self.device)
         s = torch.unsqueeze(s, 0)
-        _, probs = self.model.forward(s)
+        probs = self.model.forward(s)
         
         probs = torch.squeeze(probs, 0)
         
@@ -63,32 +63,19 @@ class ActorCritic():
         a = a.data
         action = a[0]
         return action
-    
-    def value(self, s):
-        s = torch.tensor(s).to(self.device)
-        s = torch.unsqueeze(s, 0)
-        value, _ = self.model.forward(s)
-        value = torch.squeeze(value, 0)
-        value = value[0]
-        
-        return value    
 
     def update_weight(self, states, actions, rewards, last_state, entropy_term = 0):
         # compute Q values
-        Qval = self.value(last_state)
+        G = torch.tensor(0)
         loss = 0
         # loss obtained when rewards are obtained
         len_loss = len(rewards)
 
         for s_t, a_t, r_tt in reversed(list(zip(states, actions, rewards))):
             log_prob = torch.log(self.pi(s_t, a_t))
-            value = self.value(s_t)
-            Qval = r_tt + self.stepsize * torch.clone(Qval)
-            advantage = Qval - value
-
-            actor_loss = (-log_prob * advantage)
-            critic_loss = 0.5 * advantage.pow(2)
-            loss += actor_loss + critic_loss + 0.001 * entropy_term
+            G = log_prob + self.stepsize * G
+            
+            loss += (-1.0) * G * torch.log(self.pi(s_t, a_t) + self.ups)
             
         loss = loss/len_loss
 
@@ -165,13 +152,13 @@ if __name__ == "__main__":
     # set ActorCritic
     num_actions = env.action_space.n
     num_states = env.observation_space.shape[0]
-    ACmodel = ANN_V1(num_states, num_actions).to(device)
-    optimizer = optim.Adam(ACmodel.parameters(), lr=ALPHA)
+    REINFORCE_model = ANN_V1(num_states, num_actions).to(device)
+    optimizer = optim.Adam(REINFORCE_model.parameters(), lr=ALPHA)
 
-    ActorCritic_parameters = {
+    parameters = {
         'device': device, # device to use, 'cuda' or 'cpu'
         'env': env, # environment like gym
-        'model': ACmodel, # torch models for policy and value funciton
+        'model': REINFORCE_model, # torch models for policy and value funciton
         'optimizer': optimizer, # torch optimizer
         #MAX_EPISODES = MAX_EPISODES, # maximum episodes you want to learn
         'maxTimesteps': MAX_TIMESTEPS, # maximum timesteps agent take 
@@ -179,8 +166,7 @@ if __name__ == "__main__":
     }
 
     # Initialize Actor-Critic Mehtod
-    AC = ActorCritic(**ActorCritic_parameters)
+    RF = REINFORCE(**parameters)
 
     # TRAIN Agent
-    AC.train(MAX_EPISODES)
-
+    RF.train(MAX_EPISODES)
