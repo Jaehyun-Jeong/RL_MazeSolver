@@ -14,12 +14,12 @@
 
 필자는 다음과 같은 환경에서 작업했다.
 
-> Python - 3.9.12
-> pygame - 2.1.2
-> numpy - 1.19.2
-> torch - 1.7.1
-> torchvision - 0.8.0a0 
-> matplolib - 3.5.1
+> Python - 3.9.12 <br/>
+> pygame - 2.1.2 <br/>
+> numpy - 1.19.2 <br/>
+> torch - 1.7.1 <br/>
+> torchvision - 0.8.0a0 <br/>
+> matplolib - 3.5.1 <br/>
 
 그리고 미로 코드는 다음 주소의 프로젝트 파일을 수정하여 사용했다.
 
@@ -86,7 +86,7 @@ $$
 
 Policy는 상태(state)들의 집합에서 행동의 확률분포(distribution)로 가는 함수이다.
 
-그리고 상태 $s$에서 Policy $\pi$를 따라가는 State Value Function은 다음과 같이 정의한다.
+그리고 상태 $s$에서 Policy $ \pi $를 따라가는 State Value Function은 다음과 같이 정의한다.
 
 $v_\pi (s) = \mathbb{E}_\pi \left[ G_t | S_t = s \right] = \mathbb{E}_\pi \left[ \displaystyle\sum_{k=0}^{\infty} \gamma^k R_{t+k+1} | S_t = s \right] \,\, \text{ for all } s \isin \mathcal{S}$
 
