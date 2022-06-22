@@ -146,7 +146,7 @@ class ActorCritic():
         finally:
             plt.plot(range(len(returns)), returns)
 
-        env.close()
+        self.env.close()
 
 if __name__ == "__main__":
     MAX_EPISODES = 3000
