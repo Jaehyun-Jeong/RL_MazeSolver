@@ -112,7 +112,7 @@ $q_\pi (s, a) = \mathbb{E}{\pi} \left[ G_{t} | S_{t} = s, A_{t} = a \right] = \m
 
 이같이, Policy를 업데이트 하는데는 각 행동에 대한 상대적인 수정이 필요하다.
 
-**즉, REINFORCE 알고리즘과 큰 Variance를 가지는 값($G_t$)으로 업데이트할 필요가 없다.**
+**즉, REINFORCE 알고리즘과 큰 Variance를 가지는 값($G_{t}$)으로 업데이트할 필요가 없다.**
 
 > 큰 값으로 업데이트를 진행하면 Variance가 커지는 이유는 다음 예제를 보면 알 수 있다.
 
@@ -120,11 +120,11 @@ $q_\pi (s, a) = \mathbb{E}{\pi} \left[ G_{t} | S_{t} = s, A_{t} = a \right] = \m
 
 *출처: [Jerry Liu’s post to “Why does the policy gradient method have high variance”](https://www.quora.com/unanswered/Why-does-the-policy-gradient-method-have-a-high-variance)*
 
-이제 $ G_t $의 평균값 $ \bar{G} $을 알고있다고 가정하자. 이때, $ G_t - \bar{G} $로 업데이트를 하면 Variance를 줄일 수 있다.
+이제 $ G_{t} $의 평균값 $ \bar{G} $을 알고있다고 가정하자. 이때, $ G_{t} - \bar{G} $로 업데이트를 하면 Variance를 줄일 수 있다.
 
 **이같이, Variance를 줄이기 위해 사용하는 $ \bar{G} $와 같은 항을 baseline이라 한다.**
 
-이러한 관점에서 Actor-Critic 의사코드에서 $ G_t $ 대신에 $ \delta $와 같은 표현을 사용한 이유는 다음과 같다.
+이러한 관점에서 Actor-Critic 의사코드에서 $ G_{t} $ 대신에 $ \delta $와 같은 표현을 사용한 이유는 다음과 같다.
 
 ---
 
