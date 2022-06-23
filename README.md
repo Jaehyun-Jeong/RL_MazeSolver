@@ -86,9 +86,9 @@ $$
 
 Policy는 상태(state)들의 집합에서 행동의 확률분포(distribution)로 가는 함수이다.
 
-그리고 상태 $s$에서 Policy $ \pi $를 따라가는 State Value Function은 다음과 같이 정의한다.
+그리고 상태 $s$에서 Policy $\pi$를 따라가는 State Value Function은 다음과 같이 정의한다.
 
-$$ v_\pi (s) = \mathbb{E}{\pi} \left[ G_{t} | S_{t} = s \right] = \mathbb{E}{\pi} \left[ \displaystyle\sum_{k=0}^{\infty} \gamma^k R_{t+k+1} | S_{t} = s \right] \, \text{ for all } s \in \mathcal{S} $$
+$ v_\pi (s) = \mathbb{E}{\pi} \left[ G_{t} | S_{t} = s \right] = \mathbb{E}{\pi} \left[ \displaystyle\sum_{k=0}^{\infty} \gamma^k R_{t+k+1} | S_{t} = s \right] \, \text{ for all } s \in \mathcal{S} $
 
 또한, 상태 $ s $에서 행동 $ a $를 선택하고 Policy $ \pi $를 따라가는 Action Value Function은 다음과 같다.
 
@@ -102,7 +102,7 @@ $q_\pi (s, a) = \mathbb{E}{\pi} \left[ G_{t} | S_{t} = s, A_{t} = a \right] = \m
 
 **이같이, Policy(Actor)와 Value Function(Critic)을 동시에 학습하는 방법을 Actor-Critic Method라 한다.**
 
-> 보면 $ \hat{v} $과 같이 표현했는데, $ \hat{  } $ (hat)은 추정값을 의미한다. 그리고 추정값을 사용하는 이유는 환경에서 임의의 상태에 대해 그 Value를 알 수 없기 때문이다.
+> 보면 $ \hat{v} $과 같이 표현했는데, $ \hat{} \ $ (hat)은 추정값을 의미한다. 그리고 추정값을 사용하는 이유는 환경에서 임의의 상태에 대해 그 Value를 알 수 없기 때문이다.
 
 ### 3) Critic과 Variance
 
