@@ -122,9 +122,9 @@ $q_\pi (s, a) = \mathbb{E}{\pi} \left[ G_{t} | S_{t} = s, A_{t} = a \right] = \m
 
 이제 $ G_{t} $의 평균값 $ \bar{G} $을 알고있다고 가정하자. 이때, $ G_{t} - \bar{G} $로 업데이트를 하면 Variance를 줄일 수 있다.
 
-**이같이, Variance를 줄이기 위해 사용하는 $ \bar{G} $와 같은 항을 baseline이라 한다.**
+**이같이, Variance를 줄이기 위해 사용하는 $ \bar{G} $와 같은 항을 baseline이라 한다.** <br/>
 
-이러한 관점에서 Actor-Critic 의사코드에서 $ {G}\small{t} $ 대신에 $\delta$와 같은 표현을 사용한 이유는 다음과 같다.
+이러한 관점에서 Actor-Critic 의사코드에서 $ {G}_{t} $ 대신에 $\delta$와 같은 표현을 사용한 이유는 다음과 같다.
 
 ---
 
