@@ -132,7 +132,7 @@ $q_\pi (s, a) = \mathbb{E}{\pi} \left[ G_{t} | S_{t} = s, A_{t} = a \right] = \m
 
 $ R_{t+1} + \gamma \hat{v} (s_{t+1}, w) $
 
-$ = R_{t+1} + \gamma \mathbb{E}{\pi} [G_{\pi t+1} | s_{t+1}] $
+$ = R_{t+1} + \gamma \mathbb{E} _{\pi} [G_{t+1} | s_{t+1}] $
 
 $ = R_{t+1} + \gamma \mathbb{E}_\pi \left[\displaystyle\sum_{k=0}^{\infty} \gamma^k R_{t+k+2} | s_{t+1} \right] $
 
