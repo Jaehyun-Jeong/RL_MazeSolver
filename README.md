@@ -156,7 +156,7 @@ $ \delta = \hat{q} (s_t, a_t, w) - \hat{v} (s_t, w) $
 
 $ = \hat{q} (s_t, a_t, w) - \displaystyle\sum_a \pi(a | s_t) \hat{q} (s_t, a, w) $
 
-* $ \pi (a, | s_{t}) $ : 상태 $ s_t $에서 행동 $ a $를 선택할 확률
+* $\pi (a, | s_{t}) $ : 상태 $s_t $에서 행동 $a $를 선택할 확률
 
 ---
 
@@ -167,8 +167,6 @@ $ = \hat{q} (s_t, a_t, w) - \displaystyle\sum_a \pi(a | s_t) \hat{q} (s_t, a, w)
 **Equation 3는 $\bar{G}$ 대신에 $\hat{v} (s_t, w)$를 사용할 수 있는 이유를 설명한다.**
 
 **이렇게 만들어진 $\delta$를 Advantage라 한다.**
-
-### 4) 적용
 
 ## 6. Deep Q-learning (DQN)
 
