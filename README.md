@@ -238,15 +238,15 @@ state = [1, 1, 5, 6, ...,  맵정보]
 
 ### 1) 여전히 Variance가 너무 크다.
 
-![](https://firebasestorage.googleapis.com/v0/b/aing-biology.appspot.com/o/2022_maze_solver_rl%2F01.png?alt=media&token=85946ee6-6201-4f9d-9d06-529d1617567f)
+![](https://firebasestorage.googleapis.com/v0/b/aing-biology.appspot.com/o/2022_maze_solver_rl%2F01.png?alt=media&token=85946ee6-6201-4f9d-9d06-529d1617567f) <br/>
 *OpenAI Gym에 Actor-Critic을 적용시킨 경우*
 
 ### 2) local optimum
 
-![](https://firebasestorage.googleapis.com/v0/b/aing-biology.appspot.com/o/2022_maze_solver_rl%2F03.png?alt=media&token=82530d1c-b767-4aaf-b503-7923f5994a27)
+![](https://firebasestorage.googleapis.com/v0/b/aing-biology.appspot.com/o/2022_maze_solver_rl%2F03.png?alt=media&token=82530d1c-b767-4aaf-b503-7923f5994a27) <br/>
 *미로 탈출 에이전트 학습중*
 
-![](https://firebasestorage.googleapis.com/v0/b/aing-biology.appspot.com/o/2022_maze_solver_rl%2F04.png?alt=media&token=22ad52cb-abef-4c3d-ba2a-a454e1995652)
+![](https://firebasestorage.googleapis.com/v0/b/aing-biology.appspot.com/o/2022_maze_solver_rl%2F04.png?alt=media&token=22ad52cb-abef-4c3d-ba2a-a454e1995652) <br/>
 *미로 에이전트 학습 종료*
 
 위의 첫 번째 사진을 보면 오른쪽 끝 길에서 위 아래로만 움직이고 있다.
