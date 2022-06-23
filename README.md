@@ -124,7 +124,7 @@ $q_\pi (s, a) = \mathbb{E}{\pi} \left[ G_{t} | S_{t} = s, A_{t} = a \right] = \m
 
 **이같이, Variance를 줄이기 위해 사용하는 $ \bar{G} $와 같은 항을 baseline이라 한다.**
 
-이러한 관점에서 Actor-Critic 의사코드에서 $G_{t}$ 대신에 $\delta$와 같은 표현을 사용한 이유는 다음과 같다.
+이러한 관점에서 Actor-Critic 의사코드에서 $G_{t}$ 대신에 $ \delta $와 같은 표현을 사용한 이유는 다음과 같다.
 
 ---
 
