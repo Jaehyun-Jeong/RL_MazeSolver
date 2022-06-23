@@ -139,7 +139,7 @@ $$
 $$
 
 $$
-= R_{t+1} + \gamma \mathbb{E}_\pi \left[\sum_{k=0}^{\infty} \gamma^k R_{t+k+2} | s_{t+1} \right]
+= R_{t+1} + \gamma \mathbb{E}_{\pi} \left[\sum_{k=0}^{\infty} \gamma^k R_{t+k+2} | s_{t+1} \right]
 $$
 
 $$
